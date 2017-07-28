@@ -3,6 +3,10 @@ typedef struct{
     int data[MAXSIZE];
     int top;
 }SqStack;
+typedef struct LinkNode{
+    int val;
+    struct LinkNode* next;
+}LinkStack;
 void init(SqStack &stack){
     stack.top=-1;
 }
