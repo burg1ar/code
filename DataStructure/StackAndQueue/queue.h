@@ -1,5 +1,7 @@
 /*this queue is a cyclic queue
  * to avoid "fake overflow"
+ * we sacrifice a cell which will not store any data
+ * to differ two cases "empty" and "full"
  */
 #include<cstdlib>
 #define MAXSIZE 50
@@ -8,7 +10,7 @@ typedef struct{
     int front,rear;    //rear points to the next cell of the current element
 }SqQueue;
 void init(SqQueue &que){
-    que.front=que.rear;
+    que.front=que.rear=0;
 }
 bool isEmpty(SqQueue que){
     return que.front==que.rear?true:false;
@@ -27,6 +29,10 @@ bool deQueue(SqQueue &que,int &x){
     x=que.data[que.front];
     que.front=(que.front+1)%MAXSIZE;
     return true;
+}
+int getSize(SqQueue que){
+    //get the number of all elements
+    return (que.rear-que.front+MAXSIZE)%MAXSIZE;
 }
 //using linked list
 //hardly get fulled
