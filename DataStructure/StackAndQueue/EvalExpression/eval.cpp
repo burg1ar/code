@@ -18,7 +18,7 @@ int priority(char ch){
     }
 }
 //shunting-yard algorithm
-//update:detect missing operator,add "digCount" and "opCount"
+//update:detect missin/redundant operator,add "digCount" and "opCount"
 string infix_to_postfix(string expr){
     stack<char> stk;
     int digCount=0,opCount=0;
