@@ -93,7 +93,7 @@ double eval(string expr){
             }
             stk.push(z);
         }else{
-            cout<<expr<<endl;
+            cout<<"ERROR"<<endl;
             return 0; //ERROR
         }
     }
