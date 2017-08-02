@@ -25,6 +25,20 @@ double p(int n,double x){
     }
     return p1;
 }
+double p_v2(int n,double x){
+    double pre_pre_r=1;
+    double pre_r=2*x;
+    double r=pre_r;
+    while(n>1){
+        r=2*x*pre_r-2*(n-1)*pre_pre_r;
+        pre_pre_r=pre_r;
+        pre_r=r;
+        --n;
+    }
+    if(n==0) return 1;
+    return r;
+
+}
 double p_recursive(int n,double x){
     if(n==0){
         return 1;
