@@ -20,7 +20,7 @@ TNode* expressionTree(string expr){
             mid=new TNode{*it,left,right};
             stk.push(mid);
         }else{
-            cout<<"wrong expression";
+            cout<<"wrong expression"<<endl;
             return NULL; //ERROR
         }
     }
@@ -72,12 +72,14 @@ string postfix_to_infix(string expr){
             stringstream ss;
             ss<<*it;
             stk.push(ss.str());
-        }else{
-            //*it is operator
+        }else if(isOperator(*it)){
             str1=stk.top();stk.pop();
             str2=stk.top();stk.pop();
             stk.push("("+str2+(*it)+str1+")");
+        }else{
+            return "wrong expression";
         }
     }
+    if(stk.empty()) return "ERROR";
     return stk.top();
 }
