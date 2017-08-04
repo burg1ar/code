@@ -39,6 +39,22 @@ double p_v2(int n,double x){
     return r;
 
 }
+double p_v3(int n,double x){
+    stack<double> stk;
+    for(int i=n;i>1;--i){
+        stk.push(i); //'i' represents p(i,x) which is unknown
+    }
+    double p0=1,p1=2*x;
+    int tmp;
+    while(!stk.empty()){
+        tmp=p1;
+        p1=2*x*p1-2*(stk.top()-1)*p0;
+        p0=tmp;
+        stk.pop();
+    }
+    if(n==0) return p0;
+    return p1;
+}
 double p_recursive(int n,double x){
     if(n==0){
         return 1;
@@ -52,9 +68,13 @@ int main(){
     int n;
     double x;
     while(cin>>n>>x){
-        cout<<"non-recursive: "<<p(n,x)<<endl;
+        cout<<"simulate with stack: "<<p(n,x)<<endl;
         cout<<"time consume: "<<(double)clock()/CLOCKS_PER_SEC<<endl;
         cout<<"recursive: "<<p_recursive(n,x)<<endl;
+        cout<<"time consume: "<<(double)clock()/CLOCKS_PER_SEC<<endl;
+        cout<<"p_v3(simulation): "<<p_v3(n,x)<<endl;
+        cout<<"time consume: "<<(double)clock()/CLOCKS_PER_SEC<<endl;
+        cout<<"p_v2: "<<p_v2(n,x)<<endl;
         cout<<"time consume: "<<(double)clock()/CLOCKS_PER_SEC<<endl;
     }
     return 0;
