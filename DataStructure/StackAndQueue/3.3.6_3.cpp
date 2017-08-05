@@ -45,7 +45,7 @@ double p_v3(int n,double x){
         stk.push(i); //'i' represents p(i,x) which is unknown
     }
     double p0=1,p1=2*x;
-    int tmp;
+    double tmp;
     while(!stk.empty()){
         tmp=p1;
         p1=2*x*p1-2*(stk.top()-1)*p0;
