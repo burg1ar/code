@@ -64,6 +64,21 @@ void getPostfix(TNode* tr,string &output){
         output.push_back(tr->val);
     }
 }
+//get infix expression from an expression tree recursively
+string getInfix(TNode* tr){
+    string t1,t2;
+    if(tr->lchild)
+        t1=getInfix(tr->lchild);
+    if(tr->rchild)
+        t2=getInfix(tr->rchild);
+    if(tr->lchild==NULL && tr->rchild==NULL){
+        stringstream ss;
+        ss<<tr->val;
+        return ss.str();
+    }else{
+        return "("+t1+tr->val+t2+")";
+    }
+}
 string postfix_to_infix(string expr){
     stack<string> stk;
     string str1,str2;
@@ -82,4 +97,8 @@ string postfix_to_infix(string expr){
     }
     if(stk.empty()) return "ERROR";
     return stk.top();
+}
+//encapsulate with as few parentheses as possible
+string postfix_to_infix_v2(string expr){
+
 }
