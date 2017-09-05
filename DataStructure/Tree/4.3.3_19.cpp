@@ -7,6 +7,7 @@ typedef struct BiNode{
     BiNode* right;
 }BiNode;
 int wpl(BiNode* bt){
+    //based on level traversal
     if(bt==nullptr) return -1;
     queue<BiNode*> que;
     int wpl=0;
@@ -38,6 +39,21 @@ int wpl(BiNode* bt){
     }
     return wpl;
 }
+int wpl_preOrder(BiNode* bt,int depth){
+    //based on pre order traversal (recursively)
+    static int wpl=0;
+    if(bt->left==nullptr && bt->right==nullptr){
+        wpl+=depth*bt->weight;
+    }
+    if(bt->left)
+        wpl_preOrder(bt->left,depth+1);
+    if(bt->right)
+        wpl_preOrder(bt->right,depth+1);
+    return wpl;
+}
+int wpl_2(BiNode* bt){
+    wpl_preOrder(bt,0);
+}
 void build_tree(BiNode* &bt,int arr[],int index,int len) {
     //-1 represents nullptr
     if(index>=len || arr[index]==-1) return;
@@ -52,9 +68,13 @@ int main(){
     int arr[]={18,7,11,-1,-1,5,6,-1,-1,-1,-1,-1,-1,2,4};
     build_tree(bt,arr,0,15);
     cout<<"WPL is: "<<wpl(bt)<<endl;
+    cout<<"WPL is: (recursively) "<<wpl_2(bt)<<endl;
     BiNode* bt2;
     int arr2[]={18,16,2,4,12,-1,-1,-1,-1,7,5,-1,-1,-1,-1};
     build_tree(bt2,arr2,0,15);
     cout<<"WPL2 is: "<<wpl(bt2)<<endl;
+    //wpl_2 can only be used once,cause "wpl" is static(line 44)
+    //it will accumulate when second call happens
+    //cout<<"WPL2 is: (recursively) "<<wpl_2(bt2)<<endl;
     return 0;
 }
