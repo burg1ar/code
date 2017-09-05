@@ -26,6 +26,85 @@ void preOrder(BiNode* bt) {
         preOrder(bt->rchild);
     }
 }
+void inOrder(BiNode* bt){
+    if(bt){
+        inOrder(bt->lchild);
+        cout<<bt->val<<" ";
+        inOrder(bt->rchild);
+    }
+}
+void postOrder(BiNode* bt){
+    if(bt){
+        postOrder(bt->lchild);
+        postOrder(bt->rchild);
+        cout<<bt->val<<" ";
+    }
+}
+void preOrder_non_recursive(BiNode* bt){
+    stack<BiNode*> stk;
+    while(bt || !stk.empty()){
+        while(bt){
+            cout<<bt->val<<" ";
+            stk.push(bt);
+            bt=bt->lchild;
+        }
+        if(!stk.empty()){
+            bt=stk.top();
+            stk.pop();
+            bt=bt->rchild;
+        }
+    }
+}
+void inOrder_non_recursive(BiNode* bt){
+    stack<BiNode*> stk;
+    while(bt || !stk.empty()){
+        while(bt){
+            stk.push(bt);
+            bt=bt->lchild;
+        }
+        if(!stk.empty()){
+            bt=stk.top();
+            cout<<bt->val<<" ";
+            stk.pop();
+            bt=bt->rchild;
+        }
+    }
+}
+void postOrder_non_recursive(BiNode* bt){
+    stack<BiNode*> stk;
+    BiNode* curr=bt;
+    BiNode* preVisited=nullptr;
+    while(curr || !stk.empty()){
+        while(curr){
+            stk.push(curr);
+            curr=curr->lchild;
+        }
+        curr=stk.top();
+        if(curr->rchild==nullptr || curr->rchild==preVisited){
+            cout<<curr->val<<" ";
+            stk.pop();
+            preVisited=curr;
+            curr=nullptr;
+        }else{
+            curr=curr->rchild;
+        }
+    }
+}
+void levelOrder(BiNode* bt){
+    if(!bt) return;
+    queue<BiNode*> que;
+    BiNode* tmp;
+    que.push(bt);
+    while(!que.empty()){
+        tmp=que.front();
+        cout<<tmp->val<<" ";
+        que.pop();
+        if(tmp->lchild)
+            que.push(tmp->lchild);
+        if(tmp->rchild)
+            que.push(tmp->rchild);
+    }
+}
 void display_by_level(BiNode* bt) {
     if(!bt) return;
     queue<BiNode*> que;
@@ -59,10 +138,40 @@ int main() {
     complete_tree(bt,arr,0,5);
     preOrder(bt);
     cout<<endl;
+
     BiNode* bt2;
     char arr2[]= {'1','#','3','#','#','6','7'};
     build_tree(bt2,arr2,0,7);
+    cout<<"display_by_level:"<<endl;
     display_by_level(bt2);
+
+    cout<<"preOrder:"<<endl;
+    preOrder(bt2);
+    cout<<endl;
+
+    cout<<"preOrder_non_recursive:"<<endl;
+    preOrder_non_recursive(bt2);
+    cout<<endl;
+
+    cout<<"inOrder:"<<endl;
+    inOrder(bt2);
+    cout<<endl;
+
+    cout<<"inOrder_non_recursive:"<<endl;
+    inOrder_non_recursive(bt2);
+    cout<<endl;
+
+    cout<<"postOrder:"<<endl;
+    postOrder(bt2);
+    cout<<endl;
+
+    cout<<"postOrder_non_recursive:"<<endl;
+    postOrder_non_recursive(bt2);
+    cout<<endl;
+
+    cout<<"levelOrder:"<<endl;
+    levelOrder(bt2);
+    cout<<endl;
     return 0;
 }
 
