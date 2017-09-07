@@ -25,7 +25,7 @@ int main(){
     char arr1[]={'1','2','3','4','5'};
     build_tree(btT,arr1,0,5);
 
-    BiNode* btF1; //F meas false
+    BiNode* btF1; //F means false
     char arr2[]={'1','2','3','#','#','4','5'};
     build_tree(btF1,arr2,0,7);
 
