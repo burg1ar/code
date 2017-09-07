@@ -1,6 +1,6 @@
 #include"forTest.h"
 bool isComplete(BiNode* bt){
-    if(!bt) return true;
+    if(!bt) return true; //empty binary tree is complete(full)
     queue<BiNode*> que;
     BiNode* tmp;
     que.push(bt);
