@@ -3,7 +3,7 @@ int height(BiNode* bt){
     if(!bt) return 0;
     int lheight=height(bt->lchild);
     int rheight=height(bt->rchild);
-    return lheight>rheight?lheight+1:rheight+1;
+    return lheight>rheight?lheight+1:rheight+1; //+1:plus root
 }
 int height_non_recursive(BiNode* bt){
     if(!bt) return 0;
