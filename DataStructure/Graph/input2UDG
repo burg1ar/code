@@ -1,0 +1,19 @@
+2
+8 7
+a b c d e f g h
+a b
+a c
+b d
+b e
+c f
+c g
+e h
+the graph is:
+     a
+    / \
+   /   \
+  b     c
+ / \   / \
+d  e  f  g
+   /
+   h
