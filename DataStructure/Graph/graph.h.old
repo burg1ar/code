@@ -5,7 +5,6 @@ typedef char VertexType;
 typedef int EdgeType;
 typedef enum{DG,DN,UDG,UDN} GraphKind;
 struct MGraph;
-struct AGraph;
 bool createGraph(MGraph &G);
 bool destroyGraph(MGraph &G);
 int locate(MGraph G,VertexType v);

@@ -1,6 +1,7 @@
 #include<iostream>
-#include<climits>
 #include<queue>
+#include<cstdlib>
+#include<climits>
 #define INFINITY INT_MAX
 #define MAX_VERTEX_NUM 20
 using namespace std;
@@ -13,6 +14,19 @@ typedef struct{
     int vernum,arcnum;
     GraphKind kind;
 }MGraph,Graph;
+typedef struct ArchNode{
+    int adjvex;
+    struct ArchNode *next;
+    int weight;
+}ArchNode;
+typedef struct VNode{
+    VertexType vexInfo;
+    ArchNode *firstArc;
+}VNode,AdjList[MAX_VERTEX_NUM];
+typedef struct{
+    AdjList vertices;
+    int vexnum,arcnum;
+}AGraph;
 int locate(MGraph G,VertexType u){
     for(int i=0;i<G.vernum;++i){
         if(G.Vex[i]==u)
@@ -20,8 +34,27 @@ int locate(MGraph G,VertexType u){
     }
     return -1;
 }
+int locate(AGraph G,VertexType v){
+    for(int i=0;i<G.vexnum;++i){
+        if(G.vertices[i]==v)
+            return i;
+    }
+    return -1;
+}
 bool createDG(MGraph &G){
     return true;
+}
+bool createDG(AGraph &G){
+    cot<<"input G.vexnum and G.arcnum :"<<endl;
+    cin>>G.vexnum>>G.arcnum;
+    cout<<"input the vertexes :"<<endl;
+    for(int i=0;i<G.vexnum;++i){
+        cin>>G.vertices[i];
+    }
+    cout<<"input each VNode and the adjacent ArchNodes ending with '#':"<<endl;
+    cout<<"Example:a b c #,which means a->b->c"<<endl;
+    //unfinished function ^-^
+    return false;
 }
 bool createDN(MGraph &G){
     cout<<"input G.vernum and G.arcnum :"<<endl;
@@ -32,10 +65,10 @@ bool createDN(MGraph &G){
     //initialize the matrix
     for(int i=0;i<G.vernum;++i){
         for(int j=0;j<G.vernum;++j){
-        	if(i==j)
-        		G.Edge[i][j]=0;
-        	else
-        		G.Edge[i][j]=INFINITY;
+            if(i==j)
+                G.Edge[i][j]=0;
+            else
+                G.Edge[i][j]=INFINITY;
         }
     }
     cout<<"input all the arcs connected by two vertexes and their corresponding weights"<<endl;
@@ -140,7 +173,7 @@ void BFS(Graph G,int v){
     while(!que.empty()){
         v=que.front();
         que.pop();
-        for(int w=firstAdjVex(G,v);w>=0;w=nextAdjVex(G,v,w)){
+        for(int w=firstAdjVex(G,v);w>=0;w=nextAdjVex(G.v,w)){
             if(!visited[w]){
                 cout<<G.Vex[w]<<" ";
                 visited[w]=true;
@@ -150,7 +183,7 @@ void BFS(Graph G,int v){
     }
 }
 void BFSTraverse(Graph G){
-    for(int i=0;i<G.vernum;++i)
+    for(init i=0;i<G.vernum;++i)
         visited[i]=false;
     for(int i=0;i<G.vernum;++i){
         if(!visited[i])
